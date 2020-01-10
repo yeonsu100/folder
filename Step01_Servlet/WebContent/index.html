@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index.html</title>
+<link rel="stylesheet" href="/Step01_Servlet/resources/css/bootstrap.css" />
+</head>
+<body>
+<div class="container">
+	<h1>This is an Index page</h1>
+	<ul>
+		<!-- 상대경로 : 현재페이지의 위치를 기준으로 작성 -->
+		<li><a href="showtime.html">Show a clock</a></li>
+		<!-- 절대경로 : 서버 내에서의 절대경로는 컨텍스트명으로 시작한다-->
+		<li><a href="/Step01_Servlet/showtime.html">Show a clock</a></li>
+		
+		<li><a href="showtime">Show a clock (Servlet)</a></li>
+		<li><a href="showtime.jsp">Show a clock (jsp)</a></li>
+		
+		<!-- 슬래시로 시작하지 않으면 상대경로를 의미한다. -->
+		<li><a href="home/myhome">Go to Home!! (Servlet)</a></li>
+		<li><a href="home/myhome.jsp">Go to Home!! (jsp)</a></li>
+		
+		<li><a href="fortune/showfortune">Today's Fortune (Servlet)</a></li>
+		<li><a href="fortune/showfortune.jsp">Today's Fortune (jsp)</a></li>
+	</ul>
+</div>
+</body>
+</html>
