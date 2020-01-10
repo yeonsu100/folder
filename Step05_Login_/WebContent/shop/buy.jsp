@@ -7,8 +7,6 @@
 <title>/shop/buy.jsp</title>
 </head>
 <body>
-
-<p>Bought Successfully!</p>
-
+<p>Successfully Purchased!</p>
 </body>
-</html>
+</html> 
