@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/shop/*")			// shop 하위 폴더의 모든 요청은 필터를 거치도록 설정
+@WebFilter(value = {"/shop/*","/users/private/*"})	// 필터를 여러개 쓰고 싶으면 배열을 생성해 전달하면 된다.	
+					// shop 하위 폴더&users/private의 모든 요청은 필터를 거치도록 설정
 public class LoginFilter implements Filter{
 
 	@Override
@@ -47,8 +48,11 @@ public class LoginFilter implements Filter{
 			 * 로그인 후에 원래 가려고했던 목적지 페이지로 다시 보내야하고
 			 * 전송되던 파라미터가 있다면 파라미터 정보도 같이 넘겨주어야 한다.
 			 */
+			//원래 가려던 url 정보 읽어오기 
 			String url=request.getRequestURI();
+			//GET 방식 파라미터 문자열이 있으면 읽어오기 (num=1&name=coffee ..)
 			String query=request.getQueryString();
+			// 원래목적지?num=1&name=coffee 형식의 인코딩된 문자열 구성하기
 			String encodedUrl=null;
 			if(query==null) {
 				encodedUrl=URLEncoder.encode(url);
@@ -58,7 +62,7 @@ public class LoginFilter implements Filter{
 			
 			HttpServletResponse response=(HttpServletResponse)res;
 			String cPath=request.getContextPath();
-			// 로그인 폼으로 리다이렉트 시킨다.
+			//로그인 폼으로 리다일렉트 시켜준다.
 			response.sendRedirect(cPath+"/users/loginform.jsp?url="+encodedUrl);
 		}
 		

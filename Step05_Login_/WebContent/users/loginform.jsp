@@ -11,8 +11,8 @@
 <%
 	// "url" 이라는 파라미터가 넘어오는지 읽어와 본다.  
 	String url=request.getParameter("url");
-	if(url==null){//만일 없으면 
-		//로그인 성공후에 index.jsp 페이지로 보낼수 있도록 구성한다. 
+	if(url==null){				// 만일 없으면 
+		// 로그인 성공후에 index.jsp 페이지로 보낼수 있도록 구성한다. 
 		url=request.getContextPath()+"/index.jsp";
 	}
 %>
