@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(value = {"/shop/*","/users/private/*"})	// 필터를 여러개 쓰고 싶으면 배열을 생성해 전달하면 된다.	
+@WebFilter(value = {"/shop/*","/users/private/*","/cafe/private/*"})	// 필터를 여러개 쓰고 싶으면 배열을 생성해 전달하면 된다.	
 					// shop 하위 폴더&users/private의 모든 요청은 필터를 거치도록 설정
 public class LoginFilter implements Filter{
 
