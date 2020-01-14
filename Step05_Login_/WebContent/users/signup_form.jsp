@@ -88,6 +88,11 @@
 	// 이메일을 입력했는지 여부
 	var isEmailInput=false;
 	
+	// 아이디 입력칸에 한번이라도 입력한 적이 있는지 여부
+	var isIdDirty=false;
+	// 비밀번호 입력칸에 한번이라도 입력한 적이 있는지 여부
+	var isPwdDirty=false;
+	
 	// 이메일을 입력했을 때 실행할 함수 등록
 	$("#email").on("input", function(){
 		var email=$("#email").val();
@@ -105,13 +110,17 @@
 			isEmailInput=true;			// true를 리턴
 		}
 		
-		setEmailState();
-		
-		
+		// 이메일 에러 여부 
+		var isError=isEmailInput && !isEmailMatch;
+		// 이메일 상태 바꾸기 
+		setState("#email", isError);	
 	});
+	
 	
 	// 비밀번호를 입력할 때 실행할 함수 등록
 	$("#pwd, #pwd2").on("input", function(){
+		// 비밀번호를 한번이라도 입력하면 실행순서가 여기로 들어오므로 더티값을 true로 바꾸어준다.
+		isPwdDirty=true;
 		// 입력한 비밀번호를 읽어온다.
 		var pwd=$("#pwd").val();
 		var pwd2=$("#pwd2").val();
@@ -121,19 +130,26 @@
 		}else{
 			isPwdEqual=true;
 		}
-			// 위의 조건문을 한줄로 표현하면 다음과 같다 (3항 연산자) : isPwdEqual = pwd != pwd2 ? false : true;
+			// 위의 조건문을 한줄로 표현하면 다음과 같다 (3항 연산자)
+			// isPwdEqual = pwd != pwd2 ? false : true;
 		
 		if(pwd.length==0){
 			isPwdInput=false;
 		}else{
 			isPwdInput=true;
 		}
-		setPwdState();
+		// 비밀번호 에러 여부 
+		var isError=!isPwdEqual || !isPwdInput;
+		// 비밀번호 상태 바꾸기 
+		setState("#pwd", isError);
 	});
 		
 		
 	// 아이디를 입력할 때 실행할 함수 등록
 	$("#id").on("input", function(){
+		// 아이디를 한번이라도 입력하면 실행순서가 여기로 들어오므로 아이디 더티값을 true로 바꾸어준다.
+		isIdDirty=true;
+		
 		// 1. 입력한 아이디를 읽어온다.
 		var inputId=$("#id").val();
 		// 2. 서버에 보내서 사용가능 여부를 응답받는다.
@@ -142,168 +158,85 @@
 			method:"GET",
 			data:{inputId:inputId},
 			success:function(responseData){
-				// 사용할 수 있는 아이디인지 검증
-				if(responseData.isExist){		// 아이디가 이미 존재하는 경우 (사용 불가)
+				if(responseData.isExist){		// 만약 이미 존재하는 아이디라면 
 					isIdUsable=false;
 				}else{
 					isIdUsable=true;
 				}
-				// 화면에 없데이트 해주어야 하는 내용
-				setIdState();
+				// 아이디 에러 여부 
+				var isError= !isIdUsable || !isIdInput ;
+				// 아이디 상태 바꾸기 
+				setState("#id", isError);
 			}
 		});
 		
 		// 아이디를 입력했는지 검증
-		if(inputId.length==0){			// 만일 아이디인풋값이 0이면 (=아무것도 입력하지 않았다면)
+		if(inputId.length==0){			// 만일 아이디 입력값이 0이면 (=아무것도 입력하지 않았다면)
 			isIdInput=false;
 		}else{
 			isIdInput=true;
 		}
 		// 화면에 없데이트 해주어야 하는 내용 (isIdUsable에서의 내용과 같으므로 함수 만들어서 선언하는 것이 효율적이다)
-		setIdState();
+		//아이디 에러 여부 
+		var isError= !isIdUsable || !isIdInput ;
+		//아이디 상태 바꾸기 
+		setState("#id", isError );
 	});
 	
-	// 이메일 입력칸의 상태를 바꾸는 함수
-	function setEmailState(){
-		$("#email")
+	
+	
+	// 입력칸의 상태를 바꾸는 함수 (id / pwd / email)
+	function setState(sel, isError){
+		// 일단 UI를 초기상태로 바꾸어준다.
+		$(sel)
 		.parent()
 		.removeClass("has-success has-error")
 		.find(".help-block, .form-control-feedback")
-		.hide();			// 위에 두개를 처음에는 숨겨놓는다.
+		.hide();
 		
-		// 비밀번호 입력칸의 색상과 아이콘을 바꿔주는 작업
-		if(isEmailInput && !isEailMatch){ 
-			$("#email")
+		// 입력칸의 색상과 아이콘을 바꾸어주는 작업
+		if(isError){
+			// 입력칸이 error인 상태
+			$(sel)
 			.parent()
 			.addClass("has-error")
 			.find(".glyphicon-remove")
 			.show();
 		}else{
-			$("#email")
+			// 입력칸이 success인 상태
+			$(sel)
 			.parent()
 			.addClass("has-success")
 			.find(".glyphicon-ok")
-			.show();
+			.show();	
 		}
-		// 에러가 있다면 에러 메세지 띄우기
+		// 에러가 있다면 메세지 띄우기 (id, pwd, email)
+		if(!isIdUsable && isIdDirty){
+			$("#id_notusable").show();
+		}
+		if(!isIdInput && isIdDirty){
+			$("#id_required").show();
+		}
+		if(!isPwdEqual && isPwdDirty){
+			$("#pwd_notequal").show();
+		}
+		if(!isPwdInput && isPwdDirty){
+			$("#pwd_required").show();
+		}
 		if(isEmailInput && !isEmailMatch){
 			$("#email_notmatch").show();
 		}
-	}
-	
-	// 비밀번호 입력칸의 상태를 바꾸는 함수
-	function setPwdState(){
-		// 일단 UI를 초기상태로 바꾸어 준다.
-		$("#pwd")
-		.parent()
-		.removeClass("has-success has-error")
-		.find(".help-block, .form-control-feedback")
-		.hide();			// 위에 두개를 처음에는 숨겨놓는다.
 		
-		// 비밀번호 입력칸의 색상과 아이콘을 바꿔주는 작업
-		if(!isPwdEqual || !isPwdInput){ 
-			// 비밀번호 입력칸이 error인 상태
-			$("#pwd")
-			.parent()
-			.addClass("has-error")
-			.find(".glyphicon-remove")
-			.show();
+		// 버튼의 상태 바꾸기 (위에서 선언한 변수들 중 이메일을 제외한 모든 변수가 전부 true여야 한다)
+		if(isIdUsable && isIdInput && 				// id가 유효한지 / id를 입력했는지
+			isPwdEqual && isPwdInput && 			// pwd가 pwd2와 일치하는지 / pwd를 입력했는지
+			(!isEmailInput || isEmailMatch)  ){		// email을 입력했거나, 입력했다면 @가 들어있는지
+		  $("button[type=submit]").removeAttr("disabled");			// 속성 제거 : .removeAttr();
 		}else{
-			// 비밀번호 입력칸이 success인 상태
-			$("#pwd")
-			.parent()
-			.addClass("has-success")
-			.find(".glyphicon-ok")
-			.show();
-		}
-		
-		// 만약 에러가 있다면 에러 메세지 띄우기
-		if(!isPwdEqual){
-			$("#pwd_notequal").show();
-		}
-		if(!isPwdInput){
-			$("#pwd_required").show();
+			$("button[type=submit]").attr("disabled","disabled");	// 속성 추가 : .attr();
 		}
 	}
-	
-	
-	// 아이디 입력칸의 상태를 바꾸는 함수 (error상태인지 success상태인지)
-	function setIdState(){
-		// 일단 UI를 초기상태로 바꾸어 준다.
-		$("#id")
-		.parent()
-		.removeClass("has-success has-error")
-		.find(".help-block, .form-control-feedback")
-		.hide();			// 위에 두개를 처음에는 숨겨놓는다.
-		
-		if(!isIdUsable || !isIdInput){   // if(isIdUsable==false || isIdInput==false)와 같다
-			// 아이디 입력칸이 error인 상태
-			$("#id")
-			.parent()
-			.addClass("has-error")
-			.find(".glyphicon-remove")
-			.show();
-		}else{
-			// 아이디 입력칸이 success인 상태
-			$("#id")
-			.parent()
-			.addClass("has-success")
-			.find(".glyphicon-ok")
-			.show();
-		}
-		
-		// 만약 에러가 있다면 에러 메세지 띄우기
-		if(!isIdUsable){
-			$("#id_notusable").show();
-		}
-		if(!isIdInput){
-			$("#id_required").show();
-		}
-	}
-		
 
-	
-	
-	// 폼에 제출 이벤트가 발생했을 때 실행할 함수 등록
-	$("#signupForm").on("submit", function(){
-		// 폼의 유효성 검증을하고 만일 통과를 못했으면 폼 제출을 막는다.
-		
-		// 1. 아이디 유효성 검증
-		if(!isIdValid){
-			// 잘못된 메세지를 띄우고
-			alert("Please check ID Valid button first!");
-			// 잘못된 곳을 바로 입력할 수 있도록 포커스 주기
-			$("#id").focus();
-			return false;		// 폼 제출 막기
-		}
-		
-		// 2. 비밀번호 유효성 검증
-		var pwd=$("#pwd").val();
-		var pwd2=$("#pwd2").val();
-		if(pwd != pwd2){
-			alert("Please check password again!");
-			$("#pwd").focus();
-			return false;		// 폼 제출 막기
-		}
-		
-		// 3. 이메일 유효성 검증 (@가 포함되었는지 여부 확인)
-		var email=$("#email").val();
-		// @가 포함되어있는지 확인한다. 만일 포함되어있지 않으면 null이 리턴된다.
-		var emailValid=email.match("@");
-		if(emailValid==null){
-			alert("Please confirm email format correctly.");
-			$("#email").focus();
-			return false();
-		}
-	
-	
-	
-	});
-	
-	
-	
-
-	
 </script>
 
 </body>
