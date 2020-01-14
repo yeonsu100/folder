@@ -165,6 +165,34 @@ public class UsersDao {
 		return isExist;			// 아이디가 이미 존재하는지 여부를 리턴해준다.
 	}
 	
+	public boolean isSame(String inputPwd) {
+		boolean isSame=false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "SELECT pwd FROM users WHERE pwd=?";
+			pstmt = conn.prepareStatement(sql);
+			// ? 에 값 바인딩 
+			pstmt.setString(1, inputPwd);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				isSame=true;		// 이미 존재하는 아이디이므로...
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)rs.close();
+				if (pstmt != null)pstmt.close();
+				// connection pool 에 반납하기 
+				if (conn != null)conn.close();
+			} catch (Exception e) {}
+		return isSame;			// 아이디가 이미 존재하는지 여부를 리턴해준다.
+		}
+	}
+	
 	// 인자로 전달되는 UsersDto 에 담긴 정보가 유효한 정보인지 여부를 리턴해주는 메소드
 	public boolean isValid(UsersDto dto) {
 		boolean isValid=false;

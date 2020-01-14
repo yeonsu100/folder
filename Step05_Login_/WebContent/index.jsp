@@ -10,7 +10,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
 <title>Index.jsp</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/step03_custom.css" />
@@ -35,7 +36,7 @@
 	<%}else{ %>
 		<p> 
 			Hi, <a href="${pageContext.request.contextPath }/users/private/info.jsp">
-			<strong><%=id %></strong></a> Welcome to our Web Site!
+			<strong><%=id %></strong></a> Welcome to our Web Site!</br>
 			<a href="users/logout.jsp">Sign out</a>
 		</p>
 	<%} %>
@@ -45,8 +46,12 @@
 	<ul>
 		<h3>Product list</h3>
 		<li><a href="shop/buy.jsp?num=1&name=lipbarm">Lip Barm - BURT'S BEE</a></li>
-		<li><a href="shop/buy.jsp?num=2&name=lotion">Body Lotion - Cetaphil</a></li>
+		<li><a href="shop/buy.jsp?num=2&name=oil">Face Oil - L’Oreal</a></li>
 		<li><a href="shop/buy.jsp?num=3&name=mist">Body Mist - Victoria Secret</a></li>
+		<li><a href="shop/buy.jsp?num=4&name=sun">Sun Screen - Banana Boat</a></li>
+		<li><a href="shop/buy.jsp?num=5&name=lotion">Lotion - Cetaphil</a></li>
+		<li><a href="shop/buy.jsp?num=6&name=ampule">Facial Ampule - Estee Lauder</a></li>
+		<li><a href="shop/buy.jsp?num=7&name=shadow">Color Shadow - Avon</a></li>
 	</ul>
 
 </div>

@@ -17,6 +17,9 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/private/info.jsp</title>	<!-- 유저의 가입한 정보 출력 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 </head>
 <body>
 
@@ -41,7 +44,17 @@
 		</tr>
 	</table>
 	<a href="updateform.jsp">Revise info</a>
+	<a href="javascript:deleteConfirm()">Remove Account</a>
 </div>
+
+<script>
+	function deleteConfirm(){
+		var isDelete=confirm("<%=id%>, Are you sure delete this account?");
+		if(isDelete){
+			location.href="delete.jsp";
+		}
+	}
+</script>
 
 </body>
 </html>
