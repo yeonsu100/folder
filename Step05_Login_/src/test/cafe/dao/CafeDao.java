@@ -60,6 +60,37 @@ public class CafeDao {
 		return list;
 	}
 	
+	// 글 전체의 갯수를 리턴하는 메소드
+	public int getCount() {
+		int rowCount=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "SELECT MAX(ROWNUM) AS count"		// 로우넘 중 가장 큰 수 (=글의 전체 갯수)
+					+ " FROM board_cafe";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				rowCount=rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				//connection pool 에 반납하기 
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {}
+		}
+		return rowCount;
+	}
+	
 	// 새 글을 저장하는 메소드 (INSERT)
 	public boolean insert(CafeDto dto) {
 		Connection conn = null;
