@@ -19,6 +19,37 @@ public class CafeDao {
 		return dao;
 	}
 	
+	// 새 글을 저장하는 메소드 (INSERT)
+	public boolean insert(CafeDto dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int flag = 0;
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "INSERT INTO board_cafe"
+					+ " (num, writer, title, content, viewCount, regdate)"
+					+ " VALUES(board_cafe_seq.NEXTVAL, ?, ?, ?, 0, SYSDATE)";	// 조회수 디폴트값 0 (초기값)
+			pstmt = conn.prepareStatement(sql);
+			// ? 에 값 바인딩 하기
+			pstmt.setString(1, dto.getWriter());
+			pstmt.setString(2, dto.getTitle());
+			pstmt.setString(3, dto.getContent());
+			flag = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)pstmt.close();
+				if (conn != null)conn.close();
+			} catch (Exception e) {}
+		}
+		if (flag > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	// 글 목록을 리턴하는 메소드 (list.jsp)
 	// 일괄 import 하는 방법 : ctrl + shift + o (auto import)
 	public List<CafeDto> getList(){
@@ -28,21 +59,41 @@ public class CafeDao {
 		ResultSet rs = null;
 		try {
 			conn = new DbcpBean().getConn();
-			String sql = "SELECT num, writer, title, viewCount, regdate"
+					/*
+					 * SELECT *
+						FROM 
+						(SELECT result1.*, ROWNUM AS rnum
+							FROM
+							(SELECT num, writer, title, viewCount, regdate
+							FROM board_cafe
+							ORDER BY num DESC) result1)
+						WHERE rnum BETWEEN ? AND ?
+						(한줄씩 복붙해야 한다)
+					 */
+			String sql="SELECT *"
+					+ " FROM"
+					+ " (SELECT result1.*, ROWNUM AS rnum"
+					+ " FROM"
+					+ " (SELECT num, writer, title, viewCount, regdate"
 					+ " FROM board_cafe"
-					+ " ORDER BY num DESC";
+					+ " ORDER BY num DESC) result1)"
+					+ " WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
+			// ?에 값 바인딩
+//			pstmt.setInt(1, dto.getStartRowNum());
+//			pstmt.setInt(2, dto.getEndRowNum());
 			rs = pstmt.executeQuery();
 			while (rs.next()) {		// 반복문 돌면서
-				// select된 row의 정보를 CafeDto 객체에 담아서
-				CafeDto dto=new CafeDto();
-				dto.setNum(rs.getInt("num"));
-				dto.setWriter(rs.getString("writer"));
-				dto.setTitle(rs.getString("title"));
-				dto.setViewCount(rs.getInt("viewCount"));
-				dto.setRegdate(rs.getString("regdate"));
+				// select된 row의 정보를 CafeDto 객체에 담아서 
+				// (위에 dto와 변수명이 같으므로 일단 tmp로 변수명을 바꾸어 충돌을 막아준다.)
+				CafeDto tmp=new CafeDto();
+				tmp.setNum(rs.getInt("num"));
+				tmp.setWriter(rs.getString("writer"));
+				tmp.setTitle(rs.getString("title"));
+				tmp.setViewCount(rs.getInt("viewCount"));
+				tmp.setRegdate(rs.getString("regdate"));
 				// ArrayList객체에 누적시킨다
-				list.add(dto);
+				list.add(tmp);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,38 +142,6 @@ public class CafeDao {
 		return rowCount;
 	}
 	
-	// 새 글을 저장하는 메소드 (INSERT)
-	public boolean insert(CafeDto dto) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		int flag = 0;
-		try {
-			conn = new DbcpBean().getConn();
-			String sql = "INSERT INTO board_cafe"
-					+ " (num, writer, title, content, viewCount, regdate)"
-					+ " VALUES(board_cafe_seq.NEXTVAL, ?, ?, ?, 0, SYSDATE)";	// 조회수 디폴트값 0 (초기값)
-			pstmt = conn.prepareStatement(sql);
-			// ? 에 값 바인딩 하기
-			pstmt.setString(1, dto.getWriter());
-			pstmt.setString(2, dto.getTitle());
-			pstmt.setString(3, dto.getContent());
-			flag = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {}
-		}
-		if (flag > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
 	
 }

@@ -12,7 +12,24 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/step03_custom.css" />
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
+<style>
+	.page-display ul li{
+		float: left;		/* 왼쪽으로 일렬로 정렬 */
+		list-style-type: none;
+		margin-right: 10px;
+	}
+	.page-display ul li a{
+		text-decoration: none;
+		color: skyblue;
+	}
+	.page-display ul li.active a{
+		text-decoration: underline;
+		font-weight: bold;
+		color: purple;
+	}
+</style>
 </head>
+
 <body>
 <%
 	// 페이징 처리 로직
@@ -48,15 +65,20 @@
 	if(totalPageCount < endPageNum){
 		endPageNum=totalPageCount; 			// 보정해준다. 
 	}	
+	
+	// CafeDto 객체에 위에서 계산된 startRowNum과 endRowNum을 담는다.
+	CafeDto dto=new CafeDto();
+	dto.setStartRowNum(startRowNum);
+	dto.setEndRowNum(endRowNum);
 
 	// 1. DB에서 글 목록을 얻어온다.
-	List<CafeDto> list=CafeDao.getInstance().getList();
+	List<CafeDto> list=CafeDao.getInstance().getList(dto);
 	// 2. 글 목록을 응답한다.
 %>
 
 <div class="container">
-	<a href="private/insertform.jsp">Create a new content</a>
-	<h1>Board List</h1>
+	<a href="private/insertform.jsp">Create a new article</a>
+	<h1>Article List</h1>
 	<table>
 		<thead>
 			<tr>
@@ -78,10 +100,24 @@
 			</tr>
 		<%} %>
 		</tbody>
-		
 	</table>
 
-</div>
+	<div class="page-display">
+		<ul>
+			<%for(int i=startPageNum; i<=endPageNum; i++){ %>
+				<%if(i==pageNum){ %>
+					<li class="active">
+						<a href="list.jsp?pageNum=<%=i %>"><%=i %></a>
+					</li>
+				<%}else{ %>
+					<li>
+						<a href="list.jsp?pageNum=<%=i %>"><%=i %></a>
+					</li>
+				<%} %>
+			<%} %>
+		</ul>
+	</div>
 
+</div>
 </body>
 </html>
