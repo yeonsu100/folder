@@ -52,6 +52,10 @@
 		<li><a href="shop/buy.jsp?num=5&name=lotion">Lotion - Cetaphil</a></li>
 		<li><a href="shop/buy.jsp?num=6&name=ampule">Facial Ampule - Estee Lauder</a></li>
 		<li><a href="shop/buy.jsp?num=7&name=shadow">Color Shadow - Avon</a></li>
+	</ul></br>
+	<ul>
+		<h3>Bulletin Board</h3>
+		<li><a href="cafe/list.jsp">Go to Bulletin Board</a></li>
 	</ul>
 
 </div>
