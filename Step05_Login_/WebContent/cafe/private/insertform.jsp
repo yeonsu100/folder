@@ -22,7 +22,7 @@
 		</div>
 		<div>
 			<label for="title">Title</label>
-			<input type="text" value="title" id="title" />
+			<input type="text" name="title" id="title" />
 		</div>
 		<div>
 			<label for="content">Content</label>

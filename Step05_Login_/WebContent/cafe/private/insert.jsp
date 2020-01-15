@@ -31,14 +31,14 @@
 	<%if(isSuccess){ %>
 		<script>
 			alert("Successfully Saved!");
-			location.href="${pageContext.request.contextPath }/cafe/list.jsp"
-		</script>
-	<%}else{ %>
-		<h1>Alert</h1>
-		<p>
-			Failure to saved!
-			<a href="insertform.jsp">Please try it again.</a>
-		</p>
+			location.href="${pageContext.request.contextPath }/cafe/list.jsp";
+			</script>
+		<%}else{ %>
+			<h1>Alert</h1>
+			<p>
+				Failure to saved!
+				<a href="insertform.jsp">Please try it again.</a>
+			</p>
 	<%} %>
 </div>
 

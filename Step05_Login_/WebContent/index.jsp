@@ -55,7 +55,7 @@
 	</ul></br>
 	<ul>
 		<h3>Bulletin Board</h3>
-		<li><a href="cafe/list.jsp">Go to Bulletin Board</a></li>
+		<li><a href="${pageContext.request.contextPath }/cafe/list.jsp">Go to Bulletin Board</a></li>
 	</ul>
 
 </div>
