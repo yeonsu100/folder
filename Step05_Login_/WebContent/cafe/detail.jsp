@@ -43,16 +43,24 @@
 			<td><%=dto.getTitle() %></td>
 		</tr>
 		<tr>
-			<th>Content</th>
-			<td><textarea cols="30" rows="10"><%=dto.getContent() %></textarea></td>
-		</tr>
-		<tr>
 			<th>Date</th>
 			<td><%=dto.getRegdate() %></td>
 		</tr>
 	</table>
 	<div class="contents"><%=dto.getContent() %></div>
 	<a href="list.jsp">Show all contents</a>
+	
+	<!-- 본인이 쓴 글일때만 수정기능이 작동하도록 이 링크를 조건부로 출력한다 (세션이용) -->
+	<%
+		// 세션영역의 아이디를 읽어와본다. 만약 로그인을 하지 않았으면 null이다.
+		String id=(String)session.getAttribute("id");
+	%>
+	<%-- 글 작성자와 로그인된 아이디가 일치할 때에만 기능을 제공한다.
+		 즉, 본인이 작성한 글만 수정할 수 있도록 하기 위해 --%>
+	<%if(dto.getWriter().equals(id)){ %>
+		<a href="private/updateform.jsp?num=<%=dto.getNum() %>">Revision</a>
+	<%} %>
+	
 	
 </div>
 
