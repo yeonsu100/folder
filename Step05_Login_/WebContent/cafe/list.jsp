@@ -8,11 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/list.jsp</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/step03_custom.css" />
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/Step03_DataBase/resources/css/bootstrap.css" />
+<link rel="stylesheet" href="/Step03_DataBase/resources/css/step03_custom.css" />
 <style>
+	h1{color:#FF6C6C;}
+	th{background-color : #FFB4B4;}
 	.page-display ul li{
 		float: left;		/* 왼쪽으로 일렬로 정렬 */
 		list-style-type: none;
@@ -27,16 +27,20 @@
 		font-weight: bold;
 		color: purple;
 	}
+	.page-display ul li.muted a{
+		color: orange;
+	}
 </style>
 </head>
 
 <body>
+
 <%
 	// 페이징 처리 로직
 	// 한 페이지에 나타낼 row 의 갯수
 	final int PAGE_ROW_COUNT=5;
 	// 하단 디스플레이 페이지 갯수
-	final int PAGE_DISPLAY_COUNT=10;
+	final int PAGE_DISPLAY_COUNT=5;
 	
 	// 보여줄 페이지의 번호
 	int pageNum=1;
@@ -54,17 +58,13 @@
 	// 전체 row 의 갯수를 읽어온다.
 	int totalRow=CafeDao.getInstance().getCount();
 	// 전체 페이지의 갯수 구하기
-	int totalPageCount=
-			(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+	int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
 	// 시작 페이지 번호
-	int startPageNum=
-		1+((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
+	int startPageNum=1+((pageNum-1)/PAGE_DISPLAY_COUNT)*PAGE_DISPLAY_COUNT;
 	// 끝 페이지 번호
 	int endPageNum=startPageNum+PAGE_DISPLAY_COUNT-1;
-	// 끝 페이지 번호가 잘못된 값이라면 
-	if(totalPageCount < endPageNum){
-		endPageNum=totalPageCount; 			// 보정해준다. 
-	}	
+	// 끝 페이지 번호가 잘못된 값이라면 보정해준다.
+	if(totalPageCount < endPageNum){endPageNum=totalPageCount;}	
 	
 	// CafeDto 객체에 위에서 계산된 startRowNum과 endRowNum을 담는다.
 	CafeDto dto=new CafeDto();
@@ -94,7 +94,7 @@
 			<tr>
 				<td><%=tmp.getNum() %></td>
 				<td><%=tmp.getWriter() %></td>
-				<td><%=tmp.getTitle() %></td>
+				<td><a href="detail.jsp?num=<%=tmp.getNum() %>"><%=tmp.getTitle() %></a></td>
 				<td><%=tmp.getViewCount() %></td>
 				<td><%=tmp.getRegdate() %></td>
 			</tr>
@@ -104,8 +104,17 @@
 
 	<div class="page-display">
 		<ul>
+			<%if(startPageNum != 1){ %>
+				<li>
+					<a href="list.jsp?pageNum=<%=startPageNum-1 %>">&laquo;</a>
+				</li>
+			<%}else{ %>
+				<li class="muted">
+					<a href="javascript:">&laquo;</a>
+				</li>
+			<%} %>
 			<%for(int i=startPageNum; i<=endPageNum; i++){ %>
-				<%if(i==pageNum){ %>
+				<%if(i == pageNum){ %>
 					<li class="active">
 						<a href="list.jsp?pageNum=<%=i %>"><%=i %></a>
 					</li>
@@ -114,6 +123,15 @@
 						<a href="list.jsp?pageNum=<%=i %>"><%=i %></a>
 					</li>
 				<%} %>
+			<%} %>
+			<%if(endPageNum < totalPageCount){ %>
+				<li>
+					<a href="list.jsp?pageNum=<%=endPageNum+1 %>">&raquo;</a>
+				</li>
+			<%}else{ %>
+				<li class="muted">
+					<a href="javascript:">&raquo;</a>
+				</li>
 			<%} %>
 		</ul>
 	</div>

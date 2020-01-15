@@ -11,8 +11,8 @@ public class CafeDto {
 	private int endRowNum;
 	// 디폴트 생성자
 	public CafeDto() {}
-	public CafeDto(int num, String writer, String title, String content, 
-			int viewCount, String regdate, int startRowNum, int endRowNum) {
+	public CafeDto(int num, String writer, String title, String content, int viewCount, String regdate, int startRowNum,
+			int endRowNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -71,5 +71,5 @@ public class CafeDto {
 	public void setEndRowNum(int endRowNum) {
 		this.endRowNum = endRowNum;
 	}
-
+	
 }
