@@ -24,6 +24,8 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/private/insert.jsp</title>
+<jsp:include page="../../include/resource.jsp"></jsp:include>
+
 </head>
 <body>
 
@@ -35,9 +37,9 @@
 			</script>
 		<%}else{ %>
 			<h1>Alert</h1>
-			<p>
+			<p class="alert alert-danger">
 				Failure to saved!
-				<a href="insertform.jsp">Please try it again.</a>
+				<a class="alert-link" href="insertform.jsp">Please try it again.</a>
 			</p>
 	<%} %>
 </div>

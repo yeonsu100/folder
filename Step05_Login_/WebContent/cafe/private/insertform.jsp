@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/private/insertform.jsp</title>
+<jsp:include page="../../include/resource.jsp"></jsp:include>
 <style>
 	/* textarea의 크기가 SmartEditor의 크기가 된다. */
 	#content{
@@ -21,23 +22,27 @@
 	String id=(String)session.getAttribute("id");
 %>
 
+<jsp:include page="../../include/navbar.jsp">
+	<jsp:param value="cafe" name="category"/>
+</jsp:include>
 <div class="container">
 	<h1>Create a new content page</h1>
+	
 	<form action="insert.jsp" method="post">
-		<div>
+		<div class="form-group">
 			<label for="writer">Writer</label>
-			<input type="text" value="<%=id %>" disabled />
+			<input class="form-control" type="text" value="<%=id %>" disabled />
 		</div>
-		<div>
+		<div class="form-group">
 			<label for="title">Title</label>
-			<input type="text" name="title" id="title" placeholder="Title is required" />
+			<input class="form-control" type="text" name="title" id="title" placeholder="Title is required" />
 		</div>
-		<div>
+		<div class="form-group">
 			<label for="content">Content</label>
-			<textarea name="content" id="content" cols="30" rows="10"></textarea>
+			<textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
 		</div>
-		<button type="submit" onclick="submitContents(this);">Save</button>
-		<button type="reset">Clear</button>
+		<button class="btn btn-primary" type="submit" onclick="submitContents(this);">Save</button>
+		<button class="btn btn-default" type="reset">Clear</button>
 	</form>
 </div>
 

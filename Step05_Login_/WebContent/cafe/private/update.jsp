@@ -22,6 +22,8 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/private/update.jsp</title>
+<jsp:include page="../../include/resource.jsp"></jsp:include>
+
 </head>
 <body>
 
@@ -33,7 +35,7 @@
 		</script>
 	<%}else{ %>
 		<h1>Alert</h1>
-		<p>Failure to revision! <a href="updateform.jsp?num=<%=num %>">Try again</a></p>
+		<p class="alert alert-danger">Failure to revision! <a class="alert-link" href="updateform.jsp?num=<%=num %>">Try again</a></p>
 	<%} %>
 </div>
 

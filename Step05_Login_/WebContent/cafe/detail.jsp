@@ -20,9 +20,11 @@
 <title>/cafe/detail.jsp</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
-	.contents{
+	/* 글 내용을 출력할 div에 적용할 css */
+	.contents, table{
 		width: 100%;
 		border: 1px dotted #cecece;
+		box-shadow: 3px 3px 5px 6px #ccc;
 	}
 </style>
 </head>
