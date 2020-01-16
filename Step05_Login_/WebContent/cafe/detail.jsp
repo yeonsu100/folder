@@ -72,10 +72,20 @@
 		 즉, 본인이 작성한 글만 수정할 수 있도록 하기 위해 --%>
 	<%if(dto.getWriter().equals(id)){ %>
 		<a href="private/updateform.jsp?num=<%=dto.getNum() %>">Revision</a>
+		<a href="javascript:deleteConfirm()">Delete</a>
 	<%} %>
 	
 	
 </div>
+
+<script>
+	function deleteConfirm(){
+		var isDelete=confirm("?");
+		if(isDelete){
+			location.href="private/delete.jsp?num=<%=dto.getNum()%>";
+		}
+	}
+</script>
 
 </body>
 </html>
