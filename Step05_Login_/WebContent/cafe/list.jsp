@@ -8,29 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/list.jsp</title>
-<link rel="stylesheet" href="/Step03_DataBase/resources/css/bootstrap.css" />
-<link rel="stylesheet" href="/Step03_DataBase/resources/css/step03_custom.css" />
+
+<jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
-	h1{color:#FF6C6C;}
-	th{background-color : #FFB4B4;}
-	.page-display ul li{
-		float: left;		/* 왼쪽으로 일렬로 정렬 */
-		list-style-type: none;
-		margin-right: 10px;
-	}
-	.page-display ul li a{
-		text-decoration: none;
-		color: skyblue;
-	}
-	.page-display ul li.active a{
-		text-decoration: underline;
-		font-weight: bold;
-		color: purple;
-	}
-	.page-display ul li.muted a{
-		color: orange;
-	}
+	h1{color : #6799FF;}
+	h3{color : #FF9090;}
 </style>
+
 </head>
 
 <body>
@@ -76,40 +60,56 @@
 	// 2. 글 목록을 응답한다.
 %>
 
+<jsp:include page="../include/navbar.jsp">
+	<jsp:param value="cafe" name="category" />
+</jsp:include>
+	
 <div class="container">
-	<a href="private/insertform.jsp">Create a new article</a>
+	<ol class="breadcrumb">
+		<li><a href="list.jsp">Show all contents (List)</a></li>
+	</ol>
+	
 	<h1>Article List</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>No.</th>
-				<th>Writer</th>
-				<th>Title</th>
-				<th>View</th>
-				<th>Date</th>
-			</tr>
-		</thead>
-		<tbody>
-		<%for(CafeDto tmp:list){ %>
-			<tr>
-				<td><%=tmp.getNum() %></td>
-				<td><%=tmp.getWriter() %></td>
-				<td><a href="detail.jsp?num=<%=tmp.getNum() %>"><%=tmp.getTitle() %></a></td>
-				<td><%=tmp.getViewCount() %></td>
-				<td><%=tmp.getRegdate() %></td>
-			</tr>
-		<%} %>
-		</tbody>
+	<table class="table table-striped table-condensed">
+		<colgroup>  <!-- 값을 다 더했을 때 12가 되도록 -->
+			<col class="col-xs-1"/>
+			<col class="col-xs-2"/>
+			<col class="col-xs-4"/>
+			<col class="col-xs-1"/>
+			<col class="col-xs-2"/>
+		</colgroup>
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>Writer</th>
+					<th>Title</th>
+					<th>View</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%for(CafeDto tmp:list){ %>
+				<tr>
+					<td><%=tmp.getNum() %></td>
+					<td><%=tmp.getWriter() %></td>
+					<td><a href="detail.jsp?num=<%=tmp.getNum() %>"><%=tmp.getTitle() %></a></td>
+					<td><%=tmp.getViewCount() %></td>
+					<td><%=tmp.getRegdate() %></td>
+				</tr>
+			<%} %>
+			</tbody>
 	</table>
+	
+	<h3><a href="private/insertform.jsp">Create a new article</a></h3>
 
 	<div class="page-display">
-		<ul>
+		<ul class="pagination pagination-sm">
 			<%if(startPageNum != 1){ %>
 				<li>
 					<a href="list.jsp?pageNum=<%=startPageNum-1 %>">&laquo;</a>
 				</li>
 			<%}else{ %>
-				<li class="muted">
+				<li class="disabled">
 					<a href="javascript:">&laquo;</a>
 				</li>
 			<%} %>
@@ -129,7 +129,7 @@
 					<a href="list.jsp?pageNum=<%=endPageNum+1 %>">&raquo;</a>
 				</li>
 			<%}else{ %>
-				<li class="muted">
+				<li class="disabled">
 					<a href="javascript:">&raquo;</a>
 				</li>
 			<%} %>

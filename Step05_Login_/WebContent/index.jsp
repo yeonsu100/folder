@@ -13,12 +13,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
 <title>Index.jsp</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/step03_custom.css" />
 
-<!-- jquery+bootstrap javascript 로딩 -->
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
+<%-- include/resource.jsp를 include하기 --%>
+<jsp:include page="include/resource.jsp"></jsp:include>
 
 <style>
 	h1{color:skyblue;}
@@ -28,6 +25,10 @@
 
 </head>
 <body>
+
+<%-- include/navbar.jsp를 include하기 (서버 내에서의 상대경로를 작성해야 한다.) --%>
+<jsp:include page="include/navbar.jsp"></jsp:include>
+
 <div class="container">
 
 	<%if(id == null){ %>

@@ -18,6 +18,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/cafe/detail.jsp</title>
+<jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	.contents{
 		width: 100%;
@@ -26,27 +27,37 @@
 </style>
 </head>
 <body>
-
+<jsp:include page="../include/navbar.jsp">
+	<jsp:param value="cafe" name="category" />
+</jsp:include>
 <div class="container">
+	<ol class="breadcrumb">
+		<li><a href="list.jsp">Show all contents (List)</a></li>
+		<li>Show detail of content</li>
+	</ol>
 	<h1>See a detail of article</h1>
-	<table>
-		<tr>
-			<th>No.</th>
-			<td><%=dto.getNum() %></td>
-		</tr>
-		<tr>
-			<th>Writer</th>
-			<td><%=dto.getWriter() %></td>
-		</tr>
-		<tr>
-			<th>Title</th>
-			<td><%=dto.getTitle() %></td>
-		</tr>
-		<tr>
-			<th>Date</th>
-			<td><%=dto.getRegdate() %></td>
-		</tr>
-	</table>
+	<table class="table table-bordered table-condensed">
+		<colgroup>			<!-- 값을 다 더했을 때 12가 되도록 -->
+			<col class="col-xs-3"/>
+			<col class="col-xs-9"/>
+		</colgroup>
+			<tr>
+				<th>No.</th>
+				<td><%=dto.getNum() %></td>
+			</tr>
+			<tr>
+				<th>Writer</th>
+				<td><%=dto.getWriter() %></td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td><%=dto.getTitle() %></td>
+			</tr>
+			<tr>
+				<th>Date</th>
+				<td><%=dto.getRegdate() %></td>
+			</tr>
+		</table>
 	<div class="contents"><%=dto.getContent() %></div>
 	<a href="list.jsp">Show all contents</a>
 	
