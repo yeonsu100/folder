@@ -32,6 +32,7 @@
 		<!-- 네비 바 목록 (절대경로를 쓰는 것이 좋다) -->
 		<ul class="nav navbar-nav">
 			<li <%if(category.equals("cafe")){%>class="active"<%} %>><a href="${pageContext.request.contextPath }/cafe/list.jsp">Cafe</a></li>
+			<li <%if(category.equals("file")){%>class="active"<%} %>><a href="${pageContext.request.contextPath }/file/list.jsp">Web hard</a></li>
 			<li><a href="https://www.youtube.com">YouTube</a></li>
 			<li><a href="https://www.instagram.com/yunstagram_100/">Yunstagram</a></li>
 		</ul>
