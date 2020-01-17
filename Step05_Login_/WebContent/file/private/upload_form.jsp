@@ -14,10 +14,16 @@
 <div class="container">
 	<h1>File upload Form</h1>
 	<form action="upload.jsp" method="post" enctype="multipart/form-data">
-		<div>
-			<label for="myFile">Attachment</label>
-			<input type="file" name="myFile" id="myFile" />
+		<div class="form-group">
+			<label for="title">Title</label>
+			<input class="form-control" type="text" name="title" id="title" />
 		</div>
+		<div class="form-group">
+			<label for="myFile">Attachment</label>
+			<input class="form-control" type="file" name="myFile" id="myFile" />
+		</div>
+		<button class="btn btn-primary" type="submit">Save</button>
+		<button class="btn btn-default" type="reset">Save</button>
 	</form>
 </div>
 </body>
