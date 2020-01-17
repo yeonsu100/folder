@@ -18,14 +18,29 @@
 <meta charset="UTF-8">
 <title>/users/private/info.jsp</title>	<!-- 유저의 가입한 정보 출력 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.css" />
+<!-- font awesome -->
+<link href="css/font-awesome.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
+
+<style>
+	h1{color:#6D96F3;}
+	
+	body {
+	  padding-top: 40px;
+	  padding-bottom: 40px;
+	  background-color: #F0F5FF;
+	}
+	
+
+</style>
+
 </head>
 <body>
 
 <div class="container">
 	<h1>Member Information Page</h1>
-	<table>
+	<table class="table">
 		<tr>
 			<th>ID</th>
 			<td><%=dto.getId() %></td>
@@ -43,8 +58,8 @@
 			<td><%=dto.getRegdate() %></td>
 		</tr>
 	</table>
-	<a href="updateform.jsp">Revise info</a>
-	<a href="javascript:deleteConfirm()">Remove Account</a>
+	<button class="btn btn-md btn-info" ><a href="updateform.jsp">Revise info</a></button>
+	<button class="btn btn-md btn-warning" ><a href="javascript:deleteConfirm()">Remove Account</a></button>
 </div>
 
 <script>
