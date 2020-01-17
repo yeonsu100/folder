@@ -57,6 +57,7 @@
 	<ul>
 		<h3>Bulletin Board</h3>
 		<li><a href="${pageContext.request.contextPath }/cafe/list.jsp">Go to Bulletin Board</a></li>
+		<li><a href="file/list.jsp">Show a list of file</a></li>	<!-- 파일 목록보기 (자료실) -->
 	</ul>
 
 </div>
