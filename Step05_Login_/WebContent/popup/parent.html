@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/popup/parent.html</title>
+</head>
+<body>
+
+<h2>Pop up test page</h2>
+<input type="text" id="addr" placeholder="enter an address..."/>
+<button onclick="showPopup();">Show Pop up</button>
+<script>
+	function showPopup(){
+		window.open("child.html", "test", "width=400, height=300, top=150, left=150");
+				// 무엇을 띄울 것인지, 팝업의 종류, 팝업의 크기 (너비, 높이), 모니터 상에서 팝업의 위치
+	}
+	function winnie(){
+		alert("Winnie! Aloha!");
+	}
+</script>
+
+</body>
+</html>
