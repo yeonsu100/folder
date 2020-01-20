@@ -63,6 +63,8 @@
 		<h3>Cookie Test</h3>
 		<li><a href="cook/test1.jsp">Cookie Test - 1</a></li>
 		<li><a href="cook/test2.jsp">Cookie Test - 2</a></li>
+		<li><a href="popup/parent.html">Pop up Test - 1</a></li>
+		<li><a href="popup/main.jsp">Pop up Test - 2</a></li> 	<!-- 쿠키 관련된 작업을 할 때에는 html파일이 아닌 jsp파일을 사용한다 -->
 	</ul></br>
 
 </div>

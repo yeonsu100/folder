@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/popup/child.html</title>
+</head>
+<body>
+
+<h2>pop up page</h2>
+<p>It’s a special magic at Christmastime this year.
+Hearts are gay and merry, and full of yuletide cheer!
+The sprit of the season will make our dreams come true.
+Memories of Christmas are here for me and you.
+With caroling, bells ring-a-ling,
+And Santa Claus will always be
+Part of Christmas fantasy.
+On this special holiday,
+Old Saint Nick will load his sleigh.
+Santa always finds his way
+In a Christmas fantasy.
+Children sing a bright encore,
+Counting presents and keeping score.
+No one sleeps the night before
+A Christmas fantasy!
+The spirit of the season will make our dreams come true.
+Memories of Christmas are here for me and you!
+With caroling, bells ring-a-ling,
+And Santa Claus will always be
+Part of Christmas fantasy.</p>
+<button href="javascript:self.close();">Close</button>
+
+<script>
+	document.qrerySelect("#inputAddt;").addEventListener("input",function){
+		window.opener.document.querySelector("#addr").value=this.value;
+	} 
+</script>
+
+</body>
+</html>
