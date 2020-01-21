@@ -68,8 +68,10 @@
 	</ul></br>
 	<ul>
 		<h3>EL Test</h3>
-		<li><a href="el01">EL Test</a></li>
-		<li><a href="el02">EL Test</a></li>
+		<li><a href="el01">EL Test - 1</a></li>
+		<li><a href="el02">EL Test - 2</a></li>
+		<li><a href="el03">EL Test - 3</a></li>
+		<li><a href="el/test04.jsp">EL Test - 4</a></li>
 	</ul></br>
 </div>
 
