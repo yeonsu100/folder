@@ -11,7 +11,7 @@
 <title>/jstl/test01.jsp</title>
 </head>
 <body>
-<h3>JSTL (Java standard Tag Library)</h3>
+<h3>JSTL (Java Standard Tag Library)</h3>
 
 <c:forEach var="i" begin="1" end="5">
 	<p>${i }</p>
@@ -22,7 +22,7 @@
 </c:if>
 
 <c:if test="${sessionScope.id != null }">
-	<p>You are signed in as <strong>${sessionScope.id }</strong>!</p>
+	<p>You are signed in as <strong>${sessionScope.id }</strong>! - JSTL ver.</p>
 </c:if>
 
 <%-- 위의 코드를 java 코드로 작업하면 --%>
@@ -30,7 +30,7 @@
 	String id=(String)session.getAttribute("id");
 %>
 <%if(id!=null){ %>
-	<p>You are signed in as <strong><%=id %></strong>!</p>
+	<p>You are signed in as <strong><%=id %></strong>! - Java ver.</p>
 <%} %>
 
 </body>
