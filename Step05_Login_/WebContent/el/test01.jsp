@@ -17,7 +17,7 @@
 <p>myName : <strong><%=myName %></strong></p>
 <%-- 위의 코드는 아래의 EL 코드로 대체할 수 있다! --%>
 <p>myName : <strong>${requestScope.myName }</strong></p>
-			<%-- request영역에 담겨있는 .myName을 찾아 응답하라는 의미 --%>
+			<%-- request영역에 담겨있는 .myName을 찾아 응답하라는 의미, 심지어 requestScope는 생략 가능하다! --%>
 
 </body>
 </html>
