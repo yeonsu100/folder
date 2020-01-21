@@ -9,8 +9,12 @@
 	names.add("Lily");
 	names.add("Peter");
 	names.add("Mickey");
+	names.add("Minnie");
 	names.add("William");
 	names.add("Bentley");
+	names.add("Olaf");
+	names.add("Pluto");
+	names.add("Stitch");
 	
 	// request 영역에 담기
 	request.setAttribute("names", names);
@@ -34,9 +38,9 @@
 <ul>
 	<c:forEach var="tmp" items="${requestScope.names }" varStatus="status">
 		<li>		
-			status.index : <strong>${status.index}</strong>   <%-- 인덱스를 같이 출력하므로 인덱스 넘버를 알 수 있다 --%>
-			status.count : <strong>${status.count}</strong>   <%-- 순서 (혹은 갯수)를 알 수 있다 --%>
-			status.first : <strong>${status.first}</strong>   <%-- 배열의 가장 첫번째인지 여부 --%>
+			status.index : <strong>${status.index}</strong> |  <%-- 인덱스를 같이 출력하므로 인덱스 넘버를 알 수 있다 --%>
+			status.count : <strong>${status.count}</strong> |  <%-- 순서 (혹은 갯수)를 알 수 있다 --%>
+			status.first : <strong>${status.first}</strong> |  <%-- 배열의 가장 첫번째인지 여부 --%>
 			status.last : <strong>${status.last}</strong>     <%-- 배열의 가장 마지막 번호인지 여부 --%>
 			${tmp }
 		</li>
