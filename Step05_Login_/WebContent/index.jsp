@@ -76,6 +76,8 @@
 	<ul>
 		<h3>JSTL Test</h3>
 		<li><a href="jstl/test01.jsp">JSTL Test - 1</a></li>
+		<li><a href="jstl/test02.jsp">JSTL Test - 2</a></li>
+		<li><a href="jstl/test03.jsp">JSTL Test - 3</a></li>
 	</ul>
 </div>
 
