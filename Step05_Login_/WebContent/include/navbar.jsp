@@ -27,6 +27,7 @@
 			<span class="icon-bar"></span>
 		</button>
 	</div>
+	
 	<!-- xs 영역에서는 숨겨졌다가 버튼을 누르면 나오게 할 컨텐츠를 넣을 div -->
 	<div class="collapse navbar-collapse" id="one">
 		<!-- 네비 바 목록 (절대경로를 쓰는 것이 좋다) -->
