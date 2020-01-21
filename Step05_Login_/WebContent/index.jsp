@@ -73,6 +73,10 @@
 		<li><a href="el03">EL Test - 3</a></li>
 		<li><a href="el/test04.jsp">EL Test - 4</a></li>
 	</ul></br>
+	<ul>
+		<h3>JSTL Test</h3>
+		<li><a href="jstl/test01.jsp">JSTL Test - 1</a></li>
+	</ul></br>
 </div>
 
 </body>
