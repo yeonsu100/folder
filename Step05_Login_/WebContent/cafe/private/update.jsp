@@ -2,6 +2,7 @@
 <%@page import="test.cafe.dto.CafeDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
 	// 1. 폼 전송되는 수정할 글 번호를 파라미터에서 추출한다.
@@ -15,6 +16,13 @@
 	dto.setContent(content);
 	boolean isSuccess=CafeDao.getInstance().update(dto);
 	// 3. 응답한다
+	
+	// EL, JSTL을 활용하기 위해 필요한 모델을 request에 담는다.
+	request.setAttribute("isSuccess", isSuccess);
+	request.setAttribute("num", num);
+	request.setAttribute("title", title);
+	request.setAttribute("content", content);
+	request.setAttribute("dto", dto);
 %>
 
 <!DOCTYPE html>
@@ -23,21 +31,24 @@
 <meta charset="UTF-8">
 <title>/cafe/private/update.jsp</title>
 <jsp:include page="../../include/resource.jsp"></jsp:include>
-
 </head>
+
 <body>
-
 <div class="container">
-	<%if(isSuccess){ %>
-		<script>
-			alert("Successfully Revised!");
-			location.href="${pageContext.request.contextPath }/cafe/detail.jsp?num=<%=num%>";
-		</script>
-	<%}else{ %>
-		<h1>Alert</h1>
-		<p class="alert alert-danger">Failure to revision! <a class="alert-link" href="updateform.jsp?num=<%=num %>">Try again</a></p>
-	<%} %>
+	<c:choose>
+		<c:when test="${isSuccess }">
+			<script>
+				alert("Successfully Revised!");
+				location.href="${pageContext.request.contextPath }/cafe/detail.jsp?num=${num}";
+			</script>
+		</c:when>
+		<c:otherwise>
+			<h1>Alert</h1>
+			<p class="alert alert-danger">Failure to revision! 
+				<a class="alert-link" href="updateform.jsp?num=${num }">Try again</a>
+			</p>
+		</c:otherwise>
+	</c:choose>
 </div>
-
 </body>
 </html>

@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+   
 <%
 	// session 에서 "id" 라는 키값으로 저장된 문자열이 있는지 읽어와 본다.
 	// 있으면 로그인 된 상태, null 이면 로그인이 안된 상태 
 	String id=(String)session.getAttribute("id");
+
+	// EL, JSTL을 활용하기 위해 필요한 모델을 request에 담는다.
+	request.setAttribute("id", id);
 %> 
     
 <!DOCTYPE html>
@@ -50,9 +54,7 @@
 		<li><a href="shop/buy.jsp?num=2&name=oil">Face Oil - L’Oreal</a></li>
 		<li><a href="shop/buy.jsp?num=3&name=mist">Body Mist - Victoria Secret</a></li>
 		<li><a href="shop/buy.jsp?num=4&name=sun">Sun Screen - Banana Boat</a></li>
-		<li><a href="shop/buy.jsp?num=5&name=lotion">Lotion - Cetaphil</a></li>
-		<li><a href="shop/buy.jsp?num=6&name=ampule">Facial Ampule - Estee Lauder</a></li>
-		<li><a href="shop/buy.jsp?num=7&name=shadow">Color Shadow - Avon</a></li>
+		<li><a href="shop/buy.jsp?num=5&name=ampule">Facial Ampule - Estee Lauder</a></li>
 	</ul>
 	<ul>
 		<h3>Bulletin Board</h3>

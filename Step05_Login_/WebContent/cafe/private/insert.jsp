@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%
 	// 1. 폼 전송되는 파라미터 읽어오기 (글 제목, 내용)
 	String title=request.getParameter("title");
@@ -17,6 +19,9 @@
 	// 2. DB에 글 정보를 저장하고
 	boolean isSuccess=CafeDao.getInstance().insert(dto);
 	// 3. 응답하기
+	
+	// EL, JSTL을 활용하기 위해 필요한 모델을 request에 담는다.
+	request.setAttribute("isSuccess", isSuccess);
 %>
 
 <!DOCTYPE html>
@@ -30,18 +35,22 @@
 <body>
 
 <div class="container">
-	<%if(isSuccess){ %>
-		<script>
-			alert("Successfully Saved!");
-			location.href="${pageContext.request.contextPath }/cafe/list.jsp";
+	<c:choose>
+		<c:when test="${requestScope.isSuccess}">
+			<script>
+				alert("Successfully Saved!");
+				location.href="${pageContext.request.contextPath }/cafe/list.jsp";
 			</script>
-		<%}else{ %>
+		</c:when>
+		<c:otherwise>
 			<h1>Alert</h1>
 			<p class="alert alert-danger">
 				Failure to saved!
 				<a class="alert-link" href="insertform.jsp">Please try it again.</a>
 			</p>
-	<%} %>
+		</c:otherwise>
+	</c:choose>
+	
 </div>
 
 

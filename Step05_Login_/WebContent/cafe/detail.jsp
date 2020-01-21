@@ -2,6 +2,7 @@
 <%@page import="test.cafe.dto.CafeDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
 	// 1. GET방식 파라미터로 전달되는 글번호를 읽어온다.
@@ -11,6 +12,9 @@
 	// 3. 해당글의 조회수를 1 증가시킨다.
 	CafeDao.getInstance().addViewCount(num);
 	// 4. 글 정보를 응답한다.
+	
+	// EL, JSTL을 활용하기 위해 필요한 모델을 request에 담는다.
+	request.setAttribute("dto", dto);
 %>
 
 <!DOCTYPE html>
@@ -63,24 +67,19 @@
 	<div class="contents"><%=dto.getContent() %></div>
 	<a href="list.jsp">Show all contents</a>
 	
-	<!-- 본인이 쓴 글일때만 수정기능이 작동하도록 이 링크를 조건부로 출력한다 (세션이용) -->
-	<%
-		// 세션영역의 아이디를 읽어와본다. 만약 로그인을 하지 않았으면 null이다.
-		String id=(String)session.getAttribute("id");
-	%>
-	<%-- 글 작성자와 로그인된 아이디가 일치할 때에만 기능을 제공한다.
-		 즉, 본인이 작성한 글만 수정할 수 있도록 하기 위해 --%>
-	<%if(dto.getWriter().equals(id)){ %>
-		<a href="private/updateform.jsp?num=<%=dto.getNum() %>">Revision</a>
+	<%-- 본인이 쓴 글일때만 수정기능이 작동하도록 이 링크를 조건부로 출력한다 (세션이용)
+		글 작성자와 로그인된 아이디가 일치할 때에만 기능 제공 - 본인이 작성한 글만 수정할 수 있도록 하기 위해 --%>
+	
+	<c:if test="${sessionScope.id eq dto.writer }">
+		<a href="private/updateform.jsp?num=${dto.num }">Revision</a>
 		<a href="javascript:deleteConfirm()">Delete</a>
-	<%} %>
-	
-	
+	</c:if>
+
 </div>
 
 <script>
 	function deleteConfirm(){
-		var isDelete=confirm("?");
+		var isDelete=confirm("Are you sure that you want a delete this article?");
 		if(isDelete){
 			location.href="private/delete.jsp?num=<%=dto.getNum()%>";
 		}

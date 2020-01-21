@@ -1,6 +1,7 @@
 <%@page import="test.cafe.dao.CafeDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
 	// 1. 삭제할 글번호를 읽어온다.
@@ -23,6 +24,10 @@
 	// 2. DB에서 삭제한다.
 	boolean isSuccess=CafeDao.getInstance().delete(num);
 	// 3. 응답한다.
+	
+	// EL, JSTL을 활용하기 위해 필요한 모델을 request에 담는다.
+	request.setAttribute("isSuccess", isSuccess);
+	request.setAttribute("num", num);
 %>
 
 <!DOCTYPE html>
@@ -36,19 +41,21 @@
 <body>
 
 <div class="container">
-	<%if(isSuccess){%>
-		<script>
-			alert("<%=num%> is deleted.");
-			location.href="../list.jsp";
-		</script>
-	<%}else{ %>
-		<h1>Alert</h1>
-		<p class="alert alert-danger">
-			Failure to delete!
-			<a class="alert-link" href="../detail.jsp?num=<%=num%>">Try it again.</a>
-		</p>
-	<%} %>
+	<c:choose>
+		<c:when test="${isSuccess }">
+			<script>
+				alert("The article No.${num } is deleted.");
+				location.href="../list.jsp";
+			</script>
+		</c:when>
+		<c:otherwise>
+			<h1>Alert</h1>
+			<p class="alert alert-danger">
+				Failure to delete!
+				<a class="alert-link" href="../detail.jsp?num=${num }">Try it again.</a>
+			</p>
+		</c:otherwise>
+	</c:choose>
 </div>
-
 </body>
 </html>

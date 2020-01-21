@@ -3,6 +3,8 @@
 <%@page import="test.users.dto.UsersDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%
 	// 목적지 정보
 	String url=request.getParameter("url");
@@ -42,28 +44,38 @@
 	response.addCookie(idCook);
 	response.addCookie(pwdCook);
 	
+	// EL, JSTL을 활용하기 위해 필요한 모델을 request에 담는다.
+	request.setAttribute("isValid", isValid);
+	request.setAttribute("id", id);
+	request.setAttribute("url", url);
+	request.setAttribute("encodedUrl", encodedUrl);
 %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>/users/login.jsp</title>
+<style>
+	strong{color:skyblue;}
+</style>
 </head>
 <body>
 <div class="container">
-	<h1>Alert</h1>
-	<%if(isValid){ %>
-		<p>
-			Successfully signed in!</br>
-			ID : <strong><%=id %></strong> 
-			<a href="<%=url %>">Back to the INDEX page</a>
-		</p>
-	<%}else{ %>
-		<p>
-			Please confirm your ID or Password
-			<a href="loginform.jsp?url=<%=encodedUrl %>">Back to the SIGN IN page</a>
-		</p>
-	<%} %>
+	<c:choose>
+		<c:when test="${isValid }">
+			<p>
+				Successfully signed in! </br>
+				ID : <strong>${id }</strong> </br>
+				<a href="${url }">Back to the INDEX page</a>
+			</p>
+		</c:when>
+		<c:otherwise>
+			<p>
+				Please confirm your ID or Password
+				<a href="loginform.jsp?url=${encodedUrl }">Back to the SIGN IN page</a>
+			</p>
+		</c:otherwise>
+	</c:choose>
 </div>
 </body>
 </html>
