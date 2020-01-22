@@ -18,6 +18,7 @@ public class El01Servlet extends HttpServlet{
 		req.setAttribute("myName", "Winnie");
 		// jsp 페이지로 forward 이동 (응답을 위임하기)
 		RequestDispatcher rd=req.getRequestDispatcher("/el/test01.jsp");
+				// 즉 test01.jsp가 응답하기 전까지는 응답은 미루어진 상태이다. 
 		rd.forward(req, resp);
 	}
 }
