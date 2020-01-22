@@ -41,8 +41,8 @@
 	<%}else{ %>
 		<p> 
 			Hi, <a href="${pageContext.request.contextPath }/users/private/info.jsp">
-			<strong><%=id %></strong></a> Welcome to our Web Site!</br>
-			<a href="users/logout.jsp">Sign out</a>
+			<strong><%=id %></strong></a> Welcome to our Web Site! 	
+			<a href="users/logout.jsp"> --- Sign out</a>
 		</p>
 	<%} %>
 
@@ -85,6 +85,7 @@
 	<ul>
 		<h3>MVC Test</h3>
 		<li><a href="fortune">MVC Test - Today's Fortune</a></li>
+		<li><a href="cafe/list.nhn">MVC Test - List of Contents in Cafe</a></li>
 	</ul>
 </div>
 
