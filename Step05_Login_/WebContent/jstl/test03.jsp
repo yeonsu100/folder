@@ -9,19 +9,31 @@
 <meta charset="UTF-8">
 <title>/jstl/test03.jsp</title>
 </head>
+
 <body>
 
 <h3>JSTL - forTokens</h3>
 <% 
-	String hobby="piano/game/reding"; 
+	String hobby="Coding (programming)/Dancing a hula/Traveling abroad/Reading a book/Playing the ukulele"; 
 	request.setAttribute("hobby", hobby);
 %>
 <ul>
-	<%-- forTokens :  --%>
+	<%-- forTokens : 순서대로 문자열을 빼내고 싶을 때 사용 --%>
+	<%-- delims : "" 안에 들어있는 기호로 구분된 것을 하나씩 출력 --%>
 	<c:forTokens var="tmp" items="${hobby }" delims="/">
 		<li>${tmp }</li>
 	</c:forTokens>
 </ul>
+<% 
+	String character="Mickey & Minnie/Donald & Daisy/Pluto & Goofy/Lilo & Stitch/Chip & Dale/Elsa & Anna/Arial & Eric"; 
+	request.setAttribute("character", character);
+%>
+<ul>
+	<c:forTokens var="tmpp" items="${character }" delims="/">
+		<li>${tmpp }</li>
+	</c:forTokens>
+</ul>
+
 
 <%
 	request.setAttribute("num", 999);

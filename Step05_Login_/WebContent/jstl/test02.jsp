@@ -16,7 +16,7 @@
 	names.add("Pluto");
 	names.add("Stitch");
 	
-	// request 영역에 담기
+	// request 영역에 담기 (request와 session에 담긴 데이터만 쓸 수 있다. (el에서 사용하려면))
 	request.setAttribute("names", names);
 %> 
 <!DOCTYPE html>
@@ -37,6 +37,7 @@
 <h4>List of Friends</h4>
 <ul>
 	<c:forEach var="tmp" items="${requestScope.names }" varStatus="status">
+								<%-- varStatus는 변수명처럼 임의로 지을 수 있다 (상태값이라는 의미에서 "status"라고 한것임) --%>
 		<li>		
 			status.index : <strong>${status.index}</strong> |  <%-- 인덱스를 같이 출력하므로 인덱스 넘버를 알 수 있다 --%>
 			status.count : <strong>${status.count}</strong> |  <%-- 순서 (혹은 갯수)를 알 수 있다 --%>
