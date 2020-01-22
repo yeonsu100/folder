@@ -14,7 +14,7 @@ public class El03Servlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, 
 			HttpServletResponse resp) throws ServletException, IOException {
-		// 세션 영역에 String type 담기
+		// 세션 영역에 String type 담기 (request에 담으면 응답을 하기전까지만 유효하므로)
 		HttpSession session=req.getSession();
 		session.setAttribute("myNick", "Chloe");
 		// jsp 페이지로 리다일렉트 이동하기
