@@ -82,6 +82,10 @@
 		<li><a href="jstl/test03.jsp">JSTL Test - 3</a></li>
 		<li><a href="jstl/test04.jsp">JSTL Test - 4</a></li>
 	</ul>
+	<ul>
+		<h3>MVC Test</h3>
+		<li><a href="fortune">MVC Test - Today's Fortune</a></li>
+	</ul>
 </div>
 
 </body>
