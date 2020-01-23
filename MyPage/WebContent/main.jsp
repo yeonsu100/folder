@@ -12,16 +12,24 @@
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js"></script>
 	<style>
-		body{padding-top: 80px;}
-	
+		body{padding-top: 80px;
+			background-color: #000000;}
+		marquee{
+			bottom: 30px;
+			padding-top: 10px;
+			padding-bottom: 20px;}
+		embed{margin:0px 0px 10px;}
 	</style>
 </head>
 
 <body>
 <jsp:include page="include/navbar.jsp"></jsp:include>
 
+<marquee width=100% height="30" bgcolor="#C0DAFF" behavior=alternate >
+	Welcome to <strong>Winnie World</strong> the Happiest Place on Earth!</marquee></br></br>
+
 <div class="container">
-	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+	<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
 		<ol class="carousel-indicators">
 			<li data-target="#myCarousel" data-slide-to="0"></li>
 			<li data-target="#myCarousel" data-slide-to="1"></li>
@@ -80,10 +88,11 @@
 			<span class="glyphicon glyphicon-chevron-right"></span>
 			<span class="sr-only">Next</span>
 		</a>
-	</div>	</br></br></br>
+	</div>	</br></br>
 </div>
 
 <jsp:include page="include/ysfooter.jsp"></jsp:include>	
+<embed src="${pageContext.request.contextPath }/resources/music/parade.mp3" loop="true" autoplay="true" align="bottom" ></embed>
 </body>
 
 </html>
