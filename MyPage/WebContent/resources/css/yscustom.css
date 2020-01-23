@@ -1,10 +1,10 @@
-@charset "UTF-8";	/* 한글 깨지지 않도록 인코딩 */
+@charset "UTF-8";	
 
 	body{padding-top: 50px;}
 		
-	/* navbar{background-color:#C0DAFF;} */
+	/* navbar{background-color:#C0DAFF;}
 	
-	marquee{padding: 60px 40px;}
+	marquee{padding: 60px 40px;} */
 		
 	.footer-bs {
 	  	background-color: #C0DAFF;
@@ -56,6 +56,6 @@
 	}
 	.footer-bs .footer-ns p { font-size:12px; color:#1F50B5; }
 	
-	@media (min-width: 700px) {
+	@media (min-width: 600px) {
 		.footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns { border-left:solid 1px #15468E; }
 	}

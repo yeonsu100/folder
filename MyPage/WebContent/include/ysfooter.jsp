@@ -39,7 +39,7 @@
             	<h4>#Follow_Us</h4>
             	<ul>
                 	<li><a href="#">YouTube</a></li>
-                	<li><a href="#">Instagram</a></li>
+                	<li><a href="#">Yunstagram</a></li>
                 	<li><a href="#">Facebook</a></li>
                 	<li><a href="#">Winnie Tour</a></li>
                 </ul>
@@ -47,8 +47,8 @@
         	<div class="col-md-3 footer-ns animated fadeInRight">
             	<h4>About Us</h4>
                 <p>
-                	It is the only theme park designed and built to completion under the direct supervision of Walt Disney.
-                	Disneyland has a larger cumulative attendance than any other theme park in the world, with 726 million visits since it opened.
+                	It is the only theme park designed and built to completion under the direct supervision of Winnie Beckinsale.
+                	Winnie World has a larger cumulative attendance than any other theme park in the world, with 726 million visits since it opened.
                 </p>
                 <p>
                     <div class="input-group">
@@ -61,6 +61,6 @@
             </div>
         </div>
     </footer>
-    <section style="text-align:center; margin:5px auto;"><p>Copyright©2020 by <strong>Winnie Beckinsale</strong></p></section>
+    <section style="text-align:center; margin:5px auto; color: #FFD8D8;"><p>Copyright©2020 by <strong>Winnie Beckinsale</strong></p></section>
     
 </div>
