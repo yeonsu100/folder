@@ -6,7 +6,12 @@
         <div class="row">
         	<div class="col-md-3 footer-brand animated fadeInLeft">
             	<h2>Logo</h2>
-                <p>Suspendisse hendrerit tellus laoreet luctus pharetra. Aliquam porttitor vitae orci nec ultricies. Curabitur vehicula, libero eget faucibus faucibus, purus erat eleifend enim, porta pellentesque ex mi ut sem.</p>
+                <p>
+                This fairytale for all is the time you will recall 
+                with stories told throughout the years.
+				So get ready for that night when Santa takes his flight
+				'Cause Christmas time comes once a year.
+                </p>
                 <p>© 2014 BS3 UI Kit, All rights reserved</p>
             </div>
         	<div class="col-md-4 footer-nav animated fadeInUp">
